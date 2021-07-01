@@ -1,0 +1,601 @@
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>Mathematics Education</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejugothic.css">     
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap">
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.2.17/cytoscape.min.js"></script>
+        <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
+        <script src="https://unpkg.com/dagre@0.7.4/dist/dagre.js"></script>
+        <script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.5.0/cytoscape-dagre.js"></script>
+        <style>
+/* webkit printing magic: print all background colors */
+#cy {
+            position: absolute;
+            left: 0;
+            top: 10;
+            bottom: 20;
+            right: 0;
+            z-index: 999;
+        }
+        
+.page-title {
+	font-size: 1.5rem;
+	font-weight: 400;
+	margin-top: 1.875rem;
+	margin-bottom: 0.75em;
+    margin-left: 2em;
+    margin-right: 2em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+}
+.body {
+	font-size: 0.8rem;
+	font-weight: 400;
+    margin-left:6em;
+    font-family: 'Jeju Gothic', serif; 
+            }
+            
+        </style> 
+        <script> 
+
+            document.addEventListener('DOMContentLoaded', function(){
+                 const data = [
+            { // node a
+                data: { "id": 'a',
+                      "label" : '*집합론',
+                      "url" : "https://everytime.kr/lecture/view/1772264" },
+
+            },
+            { // node b
+                data: { "id": 'b1',
+                      "label" : '미분적분학1',
+                      "url":"https://everytime.kr/lecture/view/1772105"},
+
+            },
+            { // node c
+                data: { "id": 'b2',
+                      "label" : '미분적분학2',
+                      "url":"https://everytime.kr/lecture/view/1856207"}
+            },
+            { 
+                data: { "id": 'd',
+                      "label" : '*대수학',
+                      "url":"https://everytime.kr/lecture/view/487142"}
+            },
+            { 
+                data: { "id": 'e',
+                      "label" : '이산수학',
+                       "url":"https://everytime.kr/lecture/view/104207"}
+            },
+                       { 
+                data: { "id": 's',
+                      "label" : '*수학학습심리학',
+                      "url":""}
+            },
+                         { 
+                data: { "id": 'v',
+                      "label" : '수학수업설계',
+                      "url":"https://everytime.kr/lecture/view/2249509"}
+            },
+                      { 
+                data: { "id": 't',
+                      "label" : '수학적모델링',
+                      "url":""}
+            },
+            { 
+                data: { "id": 'f1',
+                      "label" : '선형대수학',
+                        "url":"https://everytime.kr/lecture/view/83750"}
+            },
+            { 
+                data: { "id": 'f2',
+                      "label" : '*선형대수학의 응용',
+                      "url":""}
+            },
+                  {
+                data: { "id": 'g1',
+                      "label" : '*해석학1',
+                      "url":"https://everytime.kr/lecture/view/42859"}
+            },
+                  { 
+                data: { "id": 'g2',
+                      "label" : '*해석학2',
+                      "url":"https://everytime.kr/lecture/view/44627"}
+            },
+                  { 
+                data: { "id": 'h',
+                      "label" : '*미분방정식',
+                      "url":"https://everytime.kr/lecture/view/42978"}
+            },
+                  { 
+                data: { "id": 'i',
+                      "label" : '*응용수학개론',
+                      "url":"https://everytime.kr/lecture/view/42980"}
+            },
+                  { 
+                data: { "id": 'j',
+                      "label" : '*정수론',
+                      "url":""}
+            },
+                  { 
+                data: { "id": 'k',
+                      "label" : '*벡터해석학',
+                      "url":""}
+            },
+                  { 
+                data: { "id": 'l',
+                      "label" : '행렬론',
+                      "url":""}
+            },
+                  { 
+                data: { "id": 'm',
+                      "label" : '*수학교육론',
+                      "url":""}
+            },
+                  { 
+                data: { "id": 'n1',
+                      "label" : '*미분기하학1',
+                      "url":""}
+            },
+                  { 
+                data: { "id": 'n2',
+                      "label" : '*미분기하학2',
+                      "url":"https://everytime.kr/lecture/view/1688718"}
+            },
+                  { 
+                data: { "id": 'o1',
+                      "label" : '*위상수학1',
+                      "url":"https://everytime.kr/lecture/view/42983"}
+            },
+                  { 
+                data: { "id": 'o2',
+                      "label" : '*위상수학2',
+                      "url":"https://everytime.kr/lecture/view/44634"}
+            },
+                  { 
+                data: { "id": 'p1',
+                      "label" : '*추상대수학1',
+                      "url":"https://everytime.kr/lecture/view/992477"}
+            },
+                  { 
+                data: { "id": 'p2',
+                      "label" : '*추상대수학2',
+                      "url":"https://everytime.kr/lecture/view/1327250"}
+            },
+                  { 
+                data: { "id": 'q1',
+                      "label" : '*확률통계학1',
+                      "url":"https://everytime.kr/lecture/view/2249508"}
+            },
+                  { 
+                data: { "id": 'q2',
+                      "label" : '확률통계학2',
+                      "url":""}
+            },
+                  { 
+                data: { "id": 'r1',
+                      "label" : '*복소함수론1',
+                      "url":"https://everytime.kr/lecture/view/44632"}
+            },
+                  { 
+                data: { "id": 'r2',
+                      "label" : '복소함수론2',
+                      "url":"https://everytime.kr/lecture/view/42986"}
+            },
+        
+        
+                  { 
+                data: { "id": 'u',
+                      "label" : '수리계획법과 응용',
+                      "url":""}
+            },
+            
+                  { 
+                data: { "id": 'w',
+                      "label" : '실해석학',
+                      "url":""}
+            },
+                  { 
+                data: { "id": 'x',
+                      "label" : '대수학특강',
+                      "url":"https://everytime.kr/lecture/view/1612052"}
+            },
+                  { 
+                data: { "id": 'y',
+                      "label" : '*수학교과논리논술',
+                      "url":""}
+            },
+                  { 
+                data: { "id": 'z',
+                      "label" : '*해석학특강',
+                      "url":"https://everytime.kr/lecture/view/44636"}
+            },
+                  { 
+                data: { "id": 'c2',
+                      "label" : '*수학교육특강',
+                      "url":""}
+            },
+                   { 
+                data: { "id": 'm2',
+                      "label" : '*학교수학교재연구',
+                      "url":"https://everytime.kr/lecture/view/103497"}
+            },
+                   { 
+                data: { "id": 'c1',
+                      "label" : '*수학교재연구 및 지도법',
+                      "url":"https://everytime.kr/lecture/view/120881"}
+            },
+                     { data: { "id": '1h1',"label" : '1-1'}},
+                     { data: { "id": '1h2',"label" : '1-2'}},
+                     { data: { "id": '1h22',"label" : '1-2'}},
+                     { data: { "id": '2h1',"label" : '2-1'}},
+                     { data: { "id": '2h2',"label" : '2-2'}},
+                     { data: { "id": '2h12',"label" : '2-1'}},
+                     { data: { "id": '2h13',"label" : '2-1'}},//
+
+                     { data: { "id": '2h22',"label" : '2-2'}},
+                     { data: { "id": '2h23',"label" : '2-2'}},
+
+                     { data: { "id": '3h1',"label" : '3-1'}},
+                     { data: { "id": '3h12',"label" : '3-1'}},
+                     { data: { "id": '3h2',"label" : '3-2'}},
+                     { data: { "id": '3h22',"label" : '3-2'}},
+                     { data: { "id": '4h1',"label" : '4-1'}},
+                     { data: { "id": '4h12',"label" : '4-1'}},
+
+            { 
+                data: { id: 'a1h2', source: 'a', target: '1h2' }///
+            },
+                     { 
+                data: { id: 'ai', source: 'a', target: 'i' }///
+            },
+              
+                     { 
+                data: { id: '1h22h1', source: '1h2', target: '2h1' }///
+            },
+                      { 
+                data: { id: '2h12h2', source: '2h1', target: '2h2' }///
+            },
+                      { 
+                data: { id: '2h2o1', source: '2h2', target: 'o1' }///
+            },
+                 
+                     { 
+                data: { id: 'b22h13', source: 'b2', target: '2h13' }///
+            },
+                     { 
+                data: { id: '2h13l', source: '2h13', target: 'l' }///
+            },
+                     { 
+                data: { id: '2h132h2', source: '2h13', target: '2h22' }
+            }, 
+                     { 
+                data: { id: '2h22q1', source: '2h22', target: 'q1' }
+            }, 
+                      { 
+                data: { id: '2h22n1', source: '2h22', target: 'n1' }
+            }, 
+                 
+                     { 
+                data: { id: '1h1d', source: '1h1', target: 'd' }
+            },
+                     { 
+                data: { id: '1h1e', source: '1h1', target: 'e' }
+            },
+                     { 
+                data: { id: '1h11h22', source: '1h1', target: '1h22' }///
+            },
+                     { 
+                data: { id: '1h22f1', source: '1h22', target: 'f1' }///
+            },
+                      { 
+                data: { id: '1h22h12', source: '1h22', target: '2h12' }///
+            },
+                     
+                      { 
+                data: { id: '2h12j', source: '2h12', target: 'j' }///
+            },
+                      { 
+                data: { id: '2h12m', source: '2h12', target: 'm' }///
+            },
+                      { 
+                data: { id: '2h132h23', source: '2h12', target: '2h23' }//
+            },
+                     { 
+                data: { id: '2h233h12', source: '2h23', target: '3h12' }//
+            },
+                     { 
+                data: { id: '2h23c1', source: '2h23', target: 'c1' }//
+            },
+                      { 
+                data: { id: 'c13h2', source: 'c1', target: '3h2' }//
+            },
+                     { 
+                data: { id: '3h24h1', source: '3h2', target: '4h1' }//
+            },
+                      { 
+                data: { id: '4h1c2', source: '4h1', target: 'c2' }//
+            },
+                     { 
+                data: { id: '3h123h22', source: '3h12', target: '3h22' }//
+            },
+                       { 
+                data: { id: '3h22v', source: '3h22', target: 'v' }//
+            },
+                      { 
+                data: { id: '3h22y', source: '3h22', target: 'y' }//
+            },
+                      { 
+                data: { id: '3h224h12', source: '3h22', target: '4h12' }//
+            },
+                        { 
+                data: { id: '4h12z', source: '4h12', target: 'z' }//
+            },
+                     { 
+                data: { id: '3h12t', source: '3h12', target: 't' }//
+            },
+                       { 
+                data: { id: '3h12s', source: '3h12', target: 's' }//
+            },
+                      { 
+                data: { id: '3h12r1', source: '3h12', target: 'r1' }//
+            },
+                 { 
+                data: { id: 'b1b2', source: 'b1', target: 'b2' }
+            },
+                  { 
+                data: { id: 'b2g1', source: 'b2', target: 'g1' }//
+            },
+                     { 
+                data: { id: 'b22h13', source: 'b2', target: '2h13' }///
+            },
+                     { 
+                data: { id: '2h132h23', source: '2h13', target: '2h23' }///
+            },
+                   { 
+                data: { id: '2h13l', source: '2h13', target: 'l' }///
+            },
+                  { 
+                data: { id: 'b2h', source: 'b2', target: 'h' }///
+            },
+                  { 
+                data: { id: 'b2i', source: 'b2', target: 'i' }///
+            },
+                  { 
+                data: { id: 'f1f2', source: 'f1', target: 'f2' }///
+            },
+                  { 
+                data: { id: 'f1l', source: 'f1', target: 'l' }///
+            },
+                  { 
+                data: { id: 'g1g2', source: 'g1', target: 'g2' }//
+            },
+                  { 
+                data: { id: 'ik', source: 'i', target: 'k' }//
+            },
+                  { 
+                data: { id: 'f23h1', source: 'f2', target: '3h1' }
+            },
+                     { 
+                data: { id: '3h1n1', source: '3h1', target: 'u' }
+            },
+                  { 
+                data: { id: 'g2o1', source: 'g2', target: 'o1' }//
+            },
+                  { 
+                data: { id: 'jp1', source: 'j', target: 'p1' }///
+            },
+                  { 
+                data: { id: 'mm2', source: 'm', target: 'm2' }///
+            },
+                  { 
+                data: { id: 'n1n2', source: 'n1', target: 'n2' }///
+            },
+                  { 
+                data: { id: 'o1o2', source: 'o1', target: 'o2' }///
+            },
+                  { 
+                data: { id: 'p1p2', source: 'p1', target: 'p2' }///
+            },
+                  { 
+                data: { id: 'q1q2', source: 'q1', target: 'q2' }///
+            },
+                  { 
+                data: { id: 'q1u', source: 'q1', target: 'u' }///
+            },
+                  { 
+                data: { id: 'o2w', source: 'o2', target: 'w' }///
+            },
+                  { 
+                data: { id: 'p2x', source: 'p2', target: 'x' }///
+            },
+                  { 
+                data: { id: 'r1r2', source: 'r1', target: 'r2' }///
+            }]; 
+
+            const cy_for_rank = cytoscape({ elements: data });
+
+            const pageRank = cy_for_rank.elements().pageRank();
+
+            const nodeMaxSize = 30;
+            const nodeMinSize = 12;
+            const nodeActiveSize = 15;
+            const fontMaxSize = 15;
+            const fontMinSize =15;
+            const fontActiveSize = 30;
+                
+            const edgeWidth = '2px';
+            var edgeActiveWidth = '4px';
+            const arrowScale = 1.2;
+            const arrowActiveScale = 1.5;
+            
+            const dimColor = '#dfe4ea';
+            const edgeColor = '#E2E2E2';
+            const nodeColor = '#708090';
+            const nodeActiveColor = '#ffa502';
+
+            const successorColor = '#ff6348';
+            // 상위 node & edge color
+            const predecessorsColor = '#1e90ff';
+            
+
+            var cy = window.cy = cytoscape({
+                //cy라는 변수안에 크게 세가지를 지정해주는 데
+                //첫번째가 layout - cytoscape에서 선택한 layout을 name에 적어둠. 거기에 따라서 rankDir이나 animate같은 효과 추가 자유롭게 가능~
+                //두번째가 style - 말 그대로 꾸며주는 거.
+                //세번째가 elements - edge와 vertex를 선언해주는 거. 위에서 data라고 변수명을 선언해준거를 호출. 
+                container: document.getElementById('cy'),
+
+
+                layout: { //레이아웃 설정
+                    name: 'dagre', //기본적인 dargre는 hierarchy
+                    rankDir: 'LR', //근데 내가 left to right로 바꿈
+                    animate:'end', //애니메이션 나타나는 효과
+                    padding: 30, //응집되는 정도
+                    rankSep: 170, //rank 간 간격인데 이거의 결과는 노드 길이 변화로 나타남
+                    spacingFactor: 0.6, //전체적인 layout 크기
+                    //container: 'mountNode'
+                },
+                
+                style: [
+                    {
+                        selector: 'node', //노드 설정
+                        style: {
+                            'font-family': 'Do Hyeon',  
+                            'background-color': nodeColor,
+                            'label':'data(label)',
+                             'width': function (ele) {
+                                return nodeMaxSize *  pageRank.rank('#' + ele.id())  + nodeMinSize;
+                            },
+                            'height': function (ele) {
+                                return nodeMaxSize *  pageRank.rank('#' + ele.id()) + nodeMinSize;
+                            },
+                            'font-size': function (ele) {
+                                return fontMaxSize *   pageRank.rank('#' + ele.id()) + fontMinSize;
+                            },
+                            'color': nodeColor
+                        }
+                    },
+
+                    {
+                        selector: 'edge', //edge설정
+                        style: {
+                            'curve-style': 'bezier',
+                            'target-arrow-shape': 'vee',
+                            'line-color': edgeColor,
+                            'target-arrow-color': edgeColor,
+                            'opacity': 2,
+                            'width': edgeWidth,
+                            'arrow-scale': arrowScale
+                        }
+                    }
+                ],
+
+                elements:data,
+            }); //cy
+                  /*여기서부터는 알테니까~*/
+            function setDimStyle(target_cy, style) {
+                target_cy.nodes().forEach(function (target) {
+                    target.style(style);
+                });
+                target_cy.edges().forEach(function (target) {
+                    target.style(style);
+                });
+            }
+            function setFocus(target_element, successorColor, predecessorsColor, edgeWidth, arrowScale) {
+                target_element.style('background-color', nodeActiveColor);
+                target_element.style('color', nodeColor);
+                target_element.successors().each(function (e) {
+                    // 상위  엣지와 노드
+                    if (e.isEdge()) {
+                        e.style('width', edgeWidth);
+                        e.style('arrow-scale', arrowScale);
+                    }
+                    e.style('color', nodeColor);
+                    e.style('background-color', successorColor);
+                    e.style('line-color', successorColor);
+                    e.style('source-arrow-color', successorColor);
+                    setOpacityElement(e, 0.5);
+                }
+                );
+                target_element.predecessors().each(function (e) {
+                    // 하위 엣지와 노드
+                    if (e.isEdge()) {
+                        e.style('width', edgeWidth);
+                        e.style('arrow-scale', arrowScale);
+                    }
+                    e.style('color', nodeColor);
+                    e.style('background-color', predecessorsColor);
+                    e.style('line-color', predecessorsColor);
+                    e.style('source-arrow-color', predecessorsColor);
+                    setOpacityElement(e, 0.5);
+                });
+                target_element.neighborhood().each(function (e) {
+                    // 이웃한 엣지와 노드
+                    setOpacityElement(e, 1);
+                }
+                );
+                target_element.style('width', Math.max(parseFloat(target_element.style('width')), nodeActiveSize));
+                target_element.style('height', Math.max(parseFloat(target_element.style('height')), nodeActiveSize));
+                target_element.style('font-size', Math.max(parseFloat(target_element.style('font-size')), fontActiveSize));
+            }
+
+            function setOpacityElement(target_element, degree) {
+                target_element.style('opacity', degree);
+            }
+
+            function setResetFocus(target_cy) {
+                target_cy.nodes().forEach(function (target) {
+                    target.style('background-color', nodeColor);
+                    var rank = pageRank.rank(target);
+                    target.style('width', nodeMaxSize * rank + nodeMinSize);
+                    target.style('height', nodeMaxSize * rank + nodeMinSize);
+                    target.style('font-size', fontMaxSize * rank + fontMinSize);
+                    target.style('color', nodeColor);
+                    target.style('opacity', 1);
+                });
+                target_cy.edges().forEach(function (target) {
+                    target.style('line-color', edgeColor);
+                    target.style('source-arrow-color', edgeColor);
+                    target.style('width', edgeWidth);
+                    target.style('arrow-scale', arrowScale);
+                    target.style('opacity', 1);
+                });
+            }
+            cy.on('tap', function (e) {
+                const url = e.target.data('url')
+                if (url && url !== '') {
+                    window.open(url);
+                }
+            });
+            cy.on('tapstart mouseover', 'node', function(e){
+                setDimStyle(cy, {
+                'background-color': dimColor,
+                'line-color': dimColor,
+                'source-arrow-color': dimColor,
+                'color': dimColor
+            });
+
+                setFocus(e.target, successorColor, predecessorsColor, edgeActiveWidth, arrowActiveScale);
+            });
+
+            cy.on('tapend mouseout', 'node', function(e){
+                 setResetFocus(e.cy);
+            }); 
+            let resizeTimer;
+
+            window.addEventListener('resize', function () {
+                this.clearTimeout(resizeTimer);
+                resizeTimer = this.setTimeout(function(){
+                    cy.fit();
+                },200);
+            });
+
+        }); //끝
+        </script>
+    </head>
+    <body><article id="6cee881b-1d3c-4f6e-84b7-73a51494d83e" class="page sans"><header><div class="page-title">💚 Mathematics Education</div></header><div class="body">2021학년도 기준으로 표기된 로드맵입니다.</div><div class="body">*[과목명]:전공코어 / [과목명]:전공심화</div><div id="cy"></div></article>
+    </body>
+</html>

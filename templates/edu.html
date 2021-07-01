@@ -1,0 +1,316 @@
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>Education</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">  
+        <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejugothic.css">      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap" >    
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.2.17/cytoscape.min.js"></script>
+        <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
+        <script src="https://unpkg.com/dagre@0.7.4/dist/dagre.js"></script>
+        <script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.5.0/cytoscape-dagre.js"></script>
+        <style>
+/* webkit printing magic: print all background colors */
+#cy {
+            position: absolute;
+            left: 0;
+            top: 10;
+            bottom: 20;
+            right: 0;
+            z-index: 999;
+        }
+        
+.page-title {
+	font-size: 1.5rem;
+	font-weight: 400;
+	margin-top: 1.875rem;
+	margin-bottom: 0.75em;
+    margin-left: 2em;
+    margin-right: 2em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.body {
+	font-size: 0.8rem;
+	font-weight: 400;
+    margin-left:6em;
+    font-family: 'Jeju Gothic', serif; 
+            }
+	
+	
+        </style> 
+        <script>
+
+            document.addEventListener('DOMContentLoaded', function(){
+                const data=[
+                  
+                  { data: { id: '1n1',"label":"*교육심리학①", "url":"https://everytime.kr/lecture/view/42992" }},
+                  { data: { id: '1n2',"label":"*서양교육사②","url":"https://everytime.kr/lecture/view/44593" } },
+                  { data: { id: '2n1',"label":"*교육철학②", "url":"https://everytime.kr/lecture/view/2009820" } },
+                  { data: { id: '2n2',"label":"*한국교육사①","url":"https://everytime.kr/lecture/view/42993" } },
+                  { data: { id: '2n3',"label":"*교육과정①","url":"https://everytime.kr/lecture/view/2009821" } },
+                  { data: { id: '2n4',"label":"*교육평가②","url":"https://everytime.kr/lecture/view/78319" } },
+                  { data: { id: '2n5',"label":"*도덕교육론②" } },
+                  
+                  { data: { id: '2n6',"label":"*학교와 학급경영②","url":"https://everytime.kr/lecture/view/44599" } },
+                  { data: { id: '2n7',"label":"*교육통계①","url":"https://everytime.kr/lecture/view/42946" } },
+                  { data: { id: '2n8',"label":"대학교육의 이해①","url":"https://everytime.kr/lecture/view/44601" } },
+                  
+                  { data: { id: '1n3',"label":"*영화속 교육이야기②","url":"https://everytime.kr/lecture/view/1856387" } }, 
+                  { data: { id: '1n4',"label":"*4차산업혁명시대미래교육①","url":"https://everytime.kr/lecture/view/1772257" } },
+                
+                  { data: { id: '2n11',"label":"*수업디자인과 성찰①","url":"https://everytime.kr/lecture/view/2249504" } }, 
+                  { data: { id: '1n6',"label":"*교육공학의 이해①","url":"https://everytime.kr/lecture/view/2249505" } }, 
+                  { data: { id: '3n1',"label":"*현대학습이론","url":"https://everytime.kr/lecture/view/44603" } }, 
+                  { data: { id: '3n2',"label":"동양교육사①","url":"https://everytime.kr/lecture/view/42999" } }, 
+                  { data: { id: '3n3',"label":"상담심리학①","url":"https://everytime.kr/lecture/view/105936" } }, 
+                  { data: { id: '3n4',"label":"*비교교육론①","url":"https://everytime.kr/lecture/view/43000" } },   
+                  { data: { id: '3n5',"label":"*교육행정학②","url":"https://everytime.kr/lecture/view/42998" } },
+                  { data: { id: '2n9',"label":"학습지도①","url":"https://everytime.kr/lecture/view/2087203" } },
+                  { data: { id: '4n1',"label":"*교육사회학①","url":"https://everytime.kr/lecture/view/47171" } },
+                  { data: { id: '3n6',"label":"*컴퓨터활용기초통계②","url":"https://everytime.kr/lecture/view/43003" } },
+                  { data: { id: '3n7',"label":"*교육우수성의 의미탐색①","url":"https://everytime.kr/lecture/view/487099" } },
+                  { data: { id: '3n8',"label":"학습동기와 정서" } },
+                  { data: { id: '3n9',"label":"교육과 창조경영①","url":"https://everytime.kr/lecture/view/2087046" } },
+                  { data: { id: '2n10',"label":"세계의 교육개혁①","url":"https://everytime.kr/lecture/view/2087204" } },
+                  { data: { id: '1n5',"label":"*삶과 교육②","url":"https://everytime.kr/lecture/view/2168834" } },
+                  { data: { id: '3n10',"label":"교육사상가연구②","url":"https://everytime.kr/lecture/view/2168835" } },
+                  { data: { id: '4n2',"label":"이러닝의 이해②","url":"https://everytime.kr/lecture/view/2168836"} },
+                  { data: { id: '4n3',"label":"교육벤처산업②","url":"https://everytime.kr/lecture/view/2169105" } }, 
+                  { data: { id: '3n11',"label":"*학교상담론①","url":"https://everytime.kr/lecture/view/2168837" } },
+                  { data: { id: '3n12',"label":"위대한 교육사상가와 교사②" } },
+                  { data: { id: '3n13',"label":"*교육정책과 정의①","url":"https://everytime.kr/lecture/view/2249507" } },
+                  { data: { id: '4n3',"label":"*상담심리와 숲치료" } },
+                  { data: { id: '1',"label":"1학년" } },
+                  { data: { id: '2',"label":"2학년" } },
+                  { data: { id: '3',"label":"3학년" } },
+                  { data: { id: '4',"label":"4학년" } },
+                  { data: { id: 'm',"label":"교육학과" } },
+                    //여기까지가 vertex생성
+                  {data: { id: 'm1', source: 'm', target: '1' }},
+                  {data: { id: 'm2', source: 'm', target: '2' }},
+                  {data: { id: 'm3', source: 'm', target: '3' }},
+                  {data: { id: 'm4', source: 'm', target: '4' }},
+                  {data: { id: '11', source: '1', target: '1n1' }},
+                  {data: { id: '12', source: '1', target: '1n2' }},
+                    {data: { id: '13', source: '1', target: '1n3' }},
+                    {data: { id: '14', source: '1', target: '1n4' }},
+                    {data: { id: '15', source: '1', target: '1n5' }},
+                    {data: { id: '16', source: '1', target: '1n6' }},
+                    {data: { id: '21', source: '2', target: '2n1' }},
+                    {data: { id: '22', source: '2', target: '2n2' }},
+                    {data: { id: '23', source: '2', target: '2n3' }},
+                    {data: { id: '24', source: '2', target: '2n4' }},
+                    {data: { id: '25', source: '2', target: '2n5' }},
+                    {data: { id: '26', source: '2', target: '2n6' }},
+                    {data: { id: '27', source: '2', target: '2n7' }},
+                    {data: { id: '28', source: '2', target: '2n8' }},
+                    {data: { id: '29', source: '2', target: '2n9' }},
+                    {data: { id: '210', source: '2', target: '2n10' }},
+                    {data: { id: '211', source: '2', target: '2n11' }},
+                    {data: { id: '31', source: '3', target: '3n1' }},
+                    {data: { id: '32', source: '3', target: '3n2' }},
+                    {data: { id: '33', source: '3', target: '3n3' }},
+                    {data: { id: '34', source: '3', target: '3n4' }},
+                    {data: { id: '35', source: '3', target: '3n5' }},
+                    {data: { id: '36', source: '3', target: '3n6' }},
+                    {data: { id: '37', source: '3', target: '3n7' }},
+                    {data: { id: '38', source: '3', target: '3n8' }},
+                    {data: { id: '39', source: '3', target: '3n9' }},
+                    {data: { id: '310', source: '3', target: '3n10' }},
+                    {data: { id: '311', source: '3', target: '3n11' }},
+                    {data: { id: '312', source: '3', target: '3n12' }},
+                    {data: { id: '313', source: '3', target: '3n13' }},
+                    {data: { id: '41', source: '4', target: '4n1' }},
+                    {data: { id: '42', source: '4', target: '4n2' }},
+                    {data: { id: '43', source: '4', target: '4n3' }}
+             
+                  ];
+
+              const cy_for_rank = cytoscape({
+                elements: data
+                });
+
+            const pageRank = cy_for_rank.elements().pageRank();
+
+            const nodeMaxSize = 12;
+            const nodeMinSize = 4;
+            const nodeActiveSize = 10;
+            const fontMaxSize = 9;
+            const fontMinSize =4;
+            const fontActiveSize = 11;
+                
+            const edgeWidth = '1.2px';
+            var edgeActiveWidth = '2.4px';
+            const arrowScale = 0.8;
+            const arrowActiveScale = 1.0;
+            
+            const dimColor = '#dfe4ea';
+            const edgeColor = '#E2E2E2';
+            const nodeColor = '#708090';
+            const nodeActiveColor = '#ffa502';
+
+            const successorColor = '#ff6348';
+            // 상위 node & edge color
+            const predecessorsColor = '#1e90ff';
+            
+
+            var cy = window.cy = cytoscape({
+                //cy라는 변수안에 크게 세가지를 지정해주는 데
+                //첫번째가 layout - cytoscape에서 선택한 layout을 name에 적어둠. 거기에 따라서 rankDir이나 animate같은 효과 추가 자유롭게 가능~
+                //두번째가 style - 말 그대로 꾸며주는 거.
+                //세번째가 elements - edge와 vertex를 선언해주는 거. 위에서 data라고 변수명을 선언해준거를 호출. 
+                container: document.getElementById('cy'),
+
+
+                layout: { //레이아웃 설정
+                    name: 'cose', //기본적인 dargre는 hierarchy
+                    //rankDir: 'LR', //근데 내가 left to right로 바꿈                   
+                    gravityRangeCompound: 1.5,
+                    idealEdgeLength: 30,
+                    animate:'end', //애니메이션 나타나는 효과                  
+                    fit: true,
+                    tile: true
+                },
+
+                style: [
+                    {
+                        selector: 'node', //노드 설정
+                        style: {
+                            'font-family': 'Jua',   
+                            'background-color': nodeColor,
+                            'label':'data(label)',
+                             'width': function (ele) {
+                                return nodeMaxSize *  pageRank.rank('#' + ele.id())  + nodeMinSize;
+                            },
+                            'height': function (ele) {
+                                return nodeMaxSize *  pageRank.rank('#' + ele.id()) + nodeMinSize;
+                            },
+                            'font-size': function (ele) {
+                                return fontMaxSize *   pageRank.rank('#' + ele.id()) + fontMinSize;
+                            },
+                            'color': nodeColor
+                        }
+                    },
+
+                    {
+                        selector: 'edge', //edge설정
+                        style: {
+                            'curve-style': 'bezier',
+                            'target-arrow-shape': 'vee',
+                            'line-color': edgeColor,
+                            'target-arrow-color': edgeColor,
+                            'opacity': 2,
+                            'width': edgeWidth,
+                            'arrow-scale': arrowScale
+                        }
+                    }
+                ],
+
+                elements:data,
+            }); //cy
+                  /*여기서부터는 알테니까~*/
+            function setDimStyle(target_cy, style) {
+                target_cy.nodes().forEach(function (target) {
+                    target.style(style);
+                });
+                target_cy.edges().forEach(function (target) {
+                    target.style(style);
+                });
+            }
+            function setFocus(target_element, successorColor, predecessorsColor, edgeWidth, arrowScale) {
+                target_element.style('background-color', nodeActiveColor);
+                target_element.style('color', nodeColor);
+                target_element.successors().each(function (e) {
+                    // 상위  엣지와 노드
+                    if (e.isEdge()) {
+                        e.style('width', edgeWidth);
+                        e.style('arrow-scale', arrowScale);
+                    }
+                    e.style('color', nodeColor);
+                    e.style('background-color', successorColor);
+                    e.style('line-color', successorColor);
+                    e.style('source-arrow-color', successorColor);
+                    setOpacityElement(e, 0.5);
+                }
+                );
+                target_element.predecessors().each(function (e) {
+                    // 하위 엣지와 노드
+                    if (e.isEdge()) {
+                        e.style('width', edgeWidth);
+                        e.style('arrow-scale', arrowScale);
+                    }
+                    e.style('color', nodeColor);
+                    e.style('background-color', predecessorsColor);
+                    e.style('line-color', predecessorsColor);
+                    e.style('source-arrow-color', predecessorsColor);
+                    setOpacityElement(e, 0.5);
+                });
+                target_element.neighborhood().each(function (e) {
+                    // 이웃한 엣지와 노드
+                    setOpacityElement(e, 1);
+                }
+                );
+                target_element.style('width', Math.max(parseFloat(target_element.style('width')), nodeActiveSize));
+                target_element.style('height', Math.max(parseFloat(target_element.style('height')), nodeActiveSize));
+                target_element.style('font-size', Math.max(parseFloat(target_element.style('font-size')), fontActiveSize));
+            }
+
+            function setOpacityElement(target_element, degree) {
+                target_element.style('opacity', degree);
+            }
+
+            function setResetFocus(target_cy) {
+                target_cy.nodes().forEach(function (target) {
+                    target.style('background-color', nodeColor);
+                    var rank = pageRank.rank(target);
+                    target.style('width', nodeMaxSize * rank + nodeMinSize);
+                    target.style('height', nodeMaxSize * rank + nodeMinSize);
+                    target.style('font-size', fontMaxSize * rank + fontMinSize);
+                    target.style('color', nodeColor);
+                    target.style('opacity', 1);
+                });
+                target_cy.edges().forEach(function (target) {
+                    target.style('line-color', edgeColor);
+                    target.style('source-arrow-color', edgeColor);
+                    target.style('width', edgeWidth);
+                    target.style('arrow-scale', arrowScale);
+                    target.style('opacity', 1);
+                });
+            }
+            cy.on('tap', function (e) {
+                const url = e.target.data('url')
+                if (url && url !== '') {
+                    window.open(url);
+                }
+            });
+            cy.on('tapstart mouseover', 'node', function(e){
+                setDimStyle(cy, {
+                'background-color': dimColor,
+                'line-color': dimColor,
+                'source-arrow-color': dimColor,
+                'color': dimColor
+            });
+
+                setFocus(e.target, successorColor, predecessorsColor, edgeActiveWidth, arrowActiveScale);
+            });
+
+            cy.on('tapend mouseout', 'node', function(e){
+                 setResetFocus(e.cy);
+            }); 
+            let resizeTimer;
+
+            window.addEventListener('resize', function () {
+                this.clearTimeout(resizeTimer);
+                resizeTimer = this.setTimeout(function(){
+                    cy.fit();
+                },200);
+            });
+
+        }); //끝
+        </script>
+    </head>
+    <body><article id="6cee881b-1d3c-4f6e-84b7-73a51494d83e" class="page sans"><header><div class="page-title">❤️ Education</div></header><div class="body">2021학년도 기준으로 표기된 로드맵입니다.</div><div class="body">*[과목명]:전공코어 / [과목명]:전공심화</div><div id="cy"></div></article>
+    </body>
+</html>

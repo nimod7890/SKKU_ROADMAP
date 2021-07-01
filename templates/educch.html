@@ -1,0 +1,332 @@
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>Education in classical Chinese</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejugothic.css">      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&display=swap">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.2.17/cytoscape.min.js"></script>
+        <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
+        <script src="https://unpkg.com/dagre@0.7.4/dist/dagre.js"></script>
+        <script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.5.0/cytoscape-dagre.js"></script>
+    <style>
+/* webkit printing magic: print all background colors */
+#cy {
+            position: absolute;
+            left: 0;
+            top: 10;
+            bottom: 20;
+            right: 0;
+            z-index: 999;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+        
+.page-title {
+	font-size: 1.5rem;
+	font-weight: 400;
+	margin-top: 1.875rem;
+	margin-bottom: 0.75em;
+    margin-left: 2em;
+    margin-right: 2em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.body {
+	font-size: 0.8rem;
+	font-weight: 400;
+    margin-left:6em;
+    font-family: 'Jeju Gothic', serif; 
+            }
+        
+</style> 
+    <script>
+
+            document.addEventListener('DOMContentLoaded', function(){
+                const data=[
+                  { data: { id: 'n0',"label":"*한문입문1(1)", "url":"https://everytime.kr/lecture/view/1612057"}},
+                  { data: { id: 'n1',"label":"*한문입문2(2)" ,"url":"https://everytime.kr/lecture/view/1688705"}}, 
+                  { data: { id: 'n2',"label":"한문문법개론(1)","url":"https://everytime.kr/lecture/view/355122"} },
+                  { data: { id: 'n4',"label":"*한문교육과미디어(1)","url":"https://everytime.kr/lecture/view/2249782" } },
+                  { data: { id: 'n5',"label":"*한자의역사(1)","url":"https://everytime.kr/lecture/view/2087198"}},
+                  { data: { id: 'n6',"label":"*서예지도법1(1)","url":"https://everytime.kr/lecture/view/1937258" } },
+                  { data: { id: 'n7',"label":"*서예지도법2(2)","url":"https://everytime.kr/lecture/view/78332" } },
+                  { data: { id: 'n8',"label":"한문교재의역사(2)","url":"https://everytime.kr/lecture/view/104041" } },
+                  { data: { id: 'n9',"label":"*한문교육론(1)","url":"https://everytime.kr/lecture/view/1937512" } },
+                  { data: { id: 'n10',"label":"*한문학습지도1(1)","url":"https://everytime.kr/lecture/view/77656" } },
+                  { data: { id: 'n11',"label":"한문학습지도2(2)","url":"https://everytime.kr/lecture/view/44622" } }, 
+                  { data: { id: 'n12',"label":"한국한시특강(1)","url":"https://everytime.kr/lecture/view/43014" } }, 
+                  { data: { id: 'n13',"label":"*한문학개론(1)","url":"https://everytime.kr/lecture/view/1937259" } }, 
+                  { data: { id: 'n14',"label":"*경전강독1(1)","url":"https://everytime.kr/lecture/view/43015" } }, 
+                  { data: { id: 'n15',"label":"*경전강독2(2)","url":"https://everytime.kr/lecture/view/44620" } }, 
+                  { data: { id: 'n16',"label":"국문학사1(1)","url":"https://everytime.kr/lecture/view/78496" } }, 
+                  { data: { id: 'n17',"label":"*한국한문학사1(1)","url":"https://everytime.kr/lecture/view/227328" } }, 
+                  { data: { id: 'n18',"label":"한국고전개론(2)","url":"https://everytime.kr/lecture/view/1856395" } }, 
+                  { data: { id: 'n19',"label":"*역사산문강독(2)","url":"https://everytime.kr/lecture/view/1327280" } }, 
+                  { data: { id: 'n20',"label":"경서특강(1)","url":"https://everytime.kr/lecture/view/992517" } }, 
+                  { data: { id: 'n21',"label":"한문고전과인성(2)","url":"https://everytime.kr/lecture/view/2168829" } }, 
+                  { data: { id: 'n22',"label":"*한국한문학사2(2)","url":"https://everytime.kr/lecture/view/104043" } }, 
+                  { data: { id: 'n23',"label":"*한문학연습","url":"https://everytime.kr/lecture/view/44614" } }, 
+                  { data: { id: 'n24',"label":"한국역사서선독(1)","url":"https://everytime.kr/lecture/view/2087197" } }, 
+                  { data: { id: 'n25',"label":"중국역사서선독(2)","url":"https://everytime.kr/lecture/view/785646" } }, 
+                  { data: { id: 'n26',"label":"*역대한시선독(1,2)","url":"https://everytime.kr/lecture/view/992443" } }, 
+                  { data: { id: 'n27',"label":"문학이론강독(1)","url":"https://everytime.kr/lecture/view/487221" } }, 
+                  { data: { id: 'n28',"label":"*한시론(2)","url":"https://everytime.kr/lecture/view/355125" } }, 
+                  { data: { id: 'n29',"label":"*한문학작가의이해(2)","url":"" } }, 
+                  { data: { id: 'n30',"label":"나려산문(1)","url":"https://everytime.kr/lecture/view/2087201" } }, 
+                  { data: { id: 'n31',"label":"*이조산문(2)","url":"https://everytime.kr/lecture/view/44623" } },
+                  { data: { id: 'n32',"label":"한국한문학특강(2)","url":"https://everytime.kr/lecture/view/785652" } }, 
+                  { data: { id: 'n33',"label":"*한문학비평(1,2)","url":"https://everytime.kr/lecture/view/2087200" } }, 
+                  { data: { id: 'n34',"label":"한문학작품감상(2)","url":"https://everytime.kr/lecture/view/2010073" } }, 
+                  { data: { id: 'n35',"label":"*한국산문의미학","url":"" } }, 
+                  { data: { id: 'n36',"label":"*한문소설(1)","url":"https://everytime.kr/lecture/view/77655" } }, 
+                  { data: { id: 'n37',"label":"*한문소설특강(1,2)","url":"https://everytime.kr/lecture/view/1856396" } }, 
+                  { data: { id: 'a',"label":"한문교육과"} }, 
+                  { data: { id: 'b',"label":"1학년"} }, 
+                  { data: { id: 'c',"label":"2/3학년"} }, 
+                  { data: { id: 'd',"label":"3/4학년"} }, 
+                    
+                    
+                    //여기까지가 vertex생성
+
+                     { data: { source: 'a', target: 'b' } },
+                     { data: { source: 'a', target: 'c' } },
+                     { data: { source: 'a', target: 'd' } },
+                     { data: { source: 'a', target: 'e' } },
+                    
+                     { data: { source: 'b', target: 'n0' } },
+                     { data: { source: 'b', target: 'n1' } },
+                     { data: { source: 'n0', target: 'n1' } },
+                     { data: { source: 'b', target: 'n13' } },
+                     { data: { source: 'b', target: 'n26' } },
+                    
+                     { data: { source: 'c', target: 'n2' } },
+                     { data: { source: 'c', target: 'n4' } },
+                     { data: { source: 'c', target: 'n5' } },
+                     { data: { source: 'c', target: 'n6' } },
+                     { data: { source: 'c', target: 'n7' } },
+                     { data: { source: 'n6', target: 'n7' } },
+                     { data: { source: 'c', target: 'n14' } },
+                     { data: { source: 'c', target: 'n15' } },
+                     { data: { source: 'n14', target: 'n15' } },
+                     { data: { source: 'c', target: 'n16' } },
+                     { data: { source: 'c', target: 'n17' } },
+                     { data: { source: 'c', target: 'n18' } },
+                     { data: { source: 'c', target: 'n19' } },
+                     { data: { source: 'c', target: 'n27' } },
+                     { data: { source: 'c', target: 'n28' } },
+                     { data: { source: 'c', target: 'n29' } },
+                     { data: { source: 'c', target: 'n30' } },
+                     { data: { source: 'c', target: 'n31' } },
+                    
+                     { data: { source: 'd', target: 'n8' } },
+                     { data: { source: 'd', target: 'n9' } },
+                     { data: { source: 'd', target: 'n10' } },
+                     { data: { source: 'd', target: 'n11' } },
+                     { data: { source: 'n10', target: 'n11' } },
+                     { data: { source: 'd', target: 'n12' } },
+                     { data: { source: 'd', target: 'n20' } },
+                     { data: { source: 'd', target: 'n21' } },
+                     { data: { source: 'd', target: 'n22' } },
+                     { data: { source: 'd', target: 'n23' } },
+                     { data: { source: 'd', target: 'n24' } },
+                     { data: { source: 'd', target: 'n25' } },
+                     { data: { source: 'd', target: 'n32' } },
+                     { data: { source: 'd', target: 'n33' } },
+                     { data: { source: 'd', target: 'n34' } },
+                     { data: { source: 'd', target: 'n35' } },
+                     { data: { source: 'd', target: 'n36' } },
+                     { data: { source: 'd', target: 'n37' } },
+                    { data: { source: 'n26', target: 'n12' } },
+                    { data: { source: 'n28', target: 'n12' } },
+
+                    
+                   //source로부터 target 지정하는 edge
+                ]; 
+
+
+            const cy_for_rank = cytoscape({ elements: data });
+
+             const pageRank = cy_for_rank.elements().pageRank();
+
+            const nodeMaxSize = 12;
+            const nodeMinSize = 4;
+            const nodeActiveSize = 10;
+            const fontMaxSize = 9;
+            const fontMinSize =4;
+            const fontActiveSize = 11;
+                
+            const edgeWidth = '1.2px';
+            var edgeActiveWidth = '2.4px';
+            const arrowScale = 0.8;
+            const arrowActiveScale = 1.0;
+            
+            const dimColor = '#dfe4ea';
+            const edgeColor = '#E2E2E2';
+            const nodeColor = '#708090';
+            const nodeActiveColor = '#ffa502';
+
+            const successorColor = '#ff6348';
+            // 상위 node & edge color
+            const predecessorsColor = '#1e90ff';
+            
+
+            var cy = window.cy = cytoscape({
+                //cy라는 변수안에 크게 세가지를 지정해주는 데
+                //첫번째가 layout - cytoscape에서 선택한 layout을 name에 적어둠. 거기에 따라서 rankDir이나 animate같은 효과 추가 자유롭게 가능~
+                //두번째가 style - 말 그대로 꾸며주는 거.
+                //세번째가 elements - edge와 vertex를 선언해주는 거. 위에서 data라고 변수명을 선언해준거를 호출. 
+                container: document.getElementById('cy'),
+
+
+                layout: { //레이아웃 설정
+                     name: 'cose', //기본적인 dargre는 hierarchy
+                    //rankDir: 'LR', //근데 내가 left to right로 바꿈                   
+                    gravityRangeCompound: 1.0,
+                    idealEdgeLength: 30,
+                    animate:'end', //애니메이션 나타나는 효과                  
+                    fit: true,
+                    tile: true
+                 
+                },
+                
+                style: [
+                    {
+                        selector: 'node', //노드 설정
+                        style: {    
+                            'font-family': 'Nanum Myeongjo',  
+                            'background-color': nodeColor,
+                            'label':'data(label)',
+                             'width': function (ele) {
+                                return nodeMaxSize *  pageRank.rank('#' + ele.id())  + nodeMinSize;
+                            },
+                            'height': function (ele) {
+                                return nodeMaxSize *  pageRank.rank('#' + ele.id()) + nodeMinSize;
+                            },
+                            'font-size': function (ele) {
+                                return fontMaxSize *   pageRank.rank('#' + ele.id()) + fontMinSize;
+                            },
+                            'color': nodeColor
+                        }
+                    },
+
+                    {
+                        selector: 'edge', //edge설정
+                        style: {
+                            'curve-style': 'bezier',
+                            'target-arrow-shape': 'vee',
+                            'line-color': edgeColor,
+                            'target-arrow-color': edgeColor,
+                            'opacity': 2,
+                            'width': edgeWidth,
+                            'arrow-scale': arrowScale
+                        }
+                    }
+                ],
+
+                elements:data,
+            }); //cy
+                  /*여기서부터는 알테니까~*/
+            function setDimStyle(target_cy, style) {
+                target_cy.nodes().forEach(function (target) {
+                    target.style(style);
+                });
+                target_cy.edges().forEach(function (target) {
+                    target.style(style);
+                });
+            }
+            function setFocus(target_element, successorColor, predecessorsColor, edgeWidth, arrowScale) {
+                target_element.style('background-color', nodeActiveColor);
+                target_element.style('color', nodeColor);
+                target_element.successors().each(function (e) {
+                    // 상위  엣지와 노드
+                    if (e.isEdge()) {
+                        e.style('width', edgeWidth);
+                        e.style('arrow-scale', arrowScale);
+                    }
+                    e.style('color', nodeColor);
+                    e.style('background-color', successorColor);
+                    e.style('line-color', successorColor);
+                    e.style('source-arrow-color', successorColor);
+                    setOpacityElement(e, 0.5);
+                }
+                );
+                target_element.predecessors().each(function (e) {
+                    // 하위 엣지와 노드
+                    if (e.isEdge()) {
+                        e.style('width', edgeWidth);
+                        e.style('arrow-scale', arrowScale);
+                    }
+                    e.style('color', nodeColor);
+                    e.style('background-color', predecessorsColor);
+                    e.style('line-color', predecessorsColor);
+                    e.style('source-arrow-color', predecessorsColor);
+                    setOpacityElement(e, 0.5);
+                });
+                target_element.neighborhood().each(function (e) {
+                    // 이웃한 엣지와 노드
+                    setOpacityElement(e, 1);
+                }
+                );
+                target_element.style('width', Math.max(parseFloat(target_element.style('width')), nodeActiveSize));
+                target_element.style('height', Math.max(parseFloat(target_element.style('height')), nodeActiveSize));
+                target_element.style('font-size', Math.max(parseFloat(target_element.style('font-size')), fontActiveSize));
+            }
+
+            function setOpacityElement(target_element, degree) {
+                target_element.style('opacity', degree);
+            }
+
+            function setResetFocus(target_cy) {
+                target_cy.nodes().forEach(function (target) {
+                    target.style('background-color', nodeColor);
+                    var rank = pageRank.rank(target);
+                    target.style('width', nodeMaxSize * rank + nodeMinSize);
+                    target.style('height', nodeMaxSize * rank + nodeMinSize);
+                    target.style('font-size', fontMaxSize * rank + fontMinSize);
+                    target.style('color', nodeColor);
+                    target.style('opacity', 1);
+                });
+                target_cy.edges().forEach(function (target) {
+                    target.style('line-color', edgeColor);
+                    target.style('source-arrow-color', edgeColor);
+                    target.style('width', edgeWidth);
+                    target.style('arrow-scale', arrowScale);
+                    target.style('opacity', 1);
+                });
+            }
+            cy.on('tap', function (e) {
+                const url = e.target.data('url')
+                if (url && url !== '') {
+                    window.open(url);
+                }
+            });
+            cy.on('tapstart mouseover', 'node', function(e){
+                setDimStyle(cy, {
+                'background-color': dimColor,
+                'line-color': dimColor,
+                'source-arrow-color': dimColor,
+                'color': dimColor
+            });
+
+                setFocus(e.target, successorColor, predecessorsColor, edgeActiveWidth, arrowActiveScale);
+            });
+
+            cy.on('tapend mouseout', 'node', function(e){
+                 setResetFocus(e.cy);
+            }); 
+            let resizeTimer;
+
+            window.addEventListener('resize', function () {
+                this.clearTimeout(resizeTimer);
+                resizeTimer = this.setTimeout(function(){
+                    cy.fit();
+                },200);
+            });
+
+        }); //끝
+      </script>
+    </head>
+    <body><article id="6cee881b-1d3c-4f6e-84b7-73a51494d83e" class="page sans"><header><div class="page-title">🧡 Education in classical Chinese</div></header><div class="body">2021학년도 기준으로 표기된 로드맵입니다.</div><div class="body">*[과목명]:전공코어 / [과목명]:전공심화</div><div id="cy"></div></article>
+    </body>
+</html>
